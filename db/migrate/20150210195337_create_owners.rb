@@ -4,7 +4,7 @@ class CreateOwners < ActiveRecord::Migration
       t.string :name
       t.string :image
       t.text :description
-      t.string :type
+      t.string :owner_type
 
       t.timestamps null: false
     end

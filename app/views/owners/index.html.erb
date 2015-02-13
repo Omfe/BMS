@@ -21,7 +21,7 @@
         <td><%= owner.name %></td>
         <td><%= owner.image %></td>
         <td><%= owner.description %></td>
-        <td><%= owner.type %></td>
+        <td><%= owner.owner_type %></td>
         <td><%=l owner.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -31,6 +31,9 @@
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-xs btn-danger' %>
+		  <%= link_to t('.show', :default => t("helpers.links.show")),
+		              owner_path(owner),
+		              :class => 'btn btn-primary' %>
         </td>
       </tr>
     <% end %>

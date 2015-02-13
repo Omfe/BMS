@@ -15,6 +15,10 @@ class BeaconsController < ApplicationController
   # GET /beacons/new
   def new
     @beacon = Beacon.new
+    
+    puts(">>>>>>>>>>>>> 1 Let's talk about #{params[:id]}.")
+    $owner = Owner.find(params[:id])
+    puts(">>>>>>>>>>>>> 1 Let's talk about the #{$owner.id}.")
   end
 
   # GET /beacons/1/edit
@@ -24,8 +28,11 @@ class BeaconsController < ApplicationController
   # POST /beacons
   # POST /beacons.json
   def create
+    #beacon.owner_id = params[:id]
     @beacon = Beacon.new(beacon_params)
-
+    puts(">>>>>>>>>>>>> 1 Let's talk about #{$owner}.")
+    @beacon.owner_id = $owner.id
+    
     respond_to do |format|
       if @beacon.save
         format.html { redirect_to @beacon, notice: 'Beacon was successfully created.' }

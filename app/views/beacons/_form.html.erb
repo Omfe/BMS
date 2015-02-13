@@ -50,17 +50,12 @@
     </div>
     <%= error_span(@beacon[:longitude]) %>
   </div>
-  <div class="control-group">
-    <%= f.label :owner_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :owner_id, :class => 'form-control' %>
-    </div>
-    <%= error_span(@beacon[:owner_id]) %>
-  </div>
 
 
-  <%= f.submit nil, :class => 'btn btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-            beacons_path, :class => 'btn btn-default' %>
+  <%= link_to t('.Activate', :default => t("helpers.links.activate")),
+              owner_path($owner),
+              :class => 'btn btn-primary' %>
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+            :back, :class => 'btn btn-default' %>
 
 <% end %>

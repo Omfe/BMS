@@ -10,6 +10,8 @@ class OwnersController < ApplicationController
   # GET /owners/1
   # GET /owners/1.json
   def show
+    puts(">>>>>>>")
+    @beacons = @owner.beacons
   end
 
   # GET /owners/new
@@ -25,7 +27,7 @@ class OwnersController < ApplicationController
   # POST /owners.json
   def create
     @owner = Owner.new(owner_params)
-
+     
     respond_to do |format|
       if @owner.save
         format.html { redirect_to @owner, notice: 'Owner was successfully created.' }
@@ -69,6 +71,6 @@ class OwnersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def owner_params
-      params.require(:owner).permit(:name, :image, :description, :type)
+      params.require(:owner).permit(:name, :image, :description, :owner_type)
     end
 end

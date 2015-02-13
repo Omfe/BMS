@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20150210195337) do
     t.string   "name"
     t.string   "image"
     t.text     "description"
-    t.string   "type"
+    t.string   "owner_type"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

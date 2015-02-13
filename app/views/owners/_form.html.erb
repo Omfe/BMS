@@ -26,6 +26,7 @@
     <%= f.label :image, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :image, :class => 'form-control' %>
+	    <%= f.file_field :image %>
     </div>
     <%= error_span(@owner[:image]) %>
   </div>
@@ -37,11 +38,11 @@
     <%= error_span(@owner[:description]) %>
   </div>
   <div class="control-group">
-    <%= f.label :type, :class => 'control-label' %>
+    <%= f.label :owner_type, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :type, :class => 'form-control' %>
+      <%= f.text_field :owner_type, :class => 'form-control' %>
     </div>
-    <%= error_span(@owner[:type]) %>
+    <%= error_span(@owner[:owner_type]) %>
   </div>
 
 
