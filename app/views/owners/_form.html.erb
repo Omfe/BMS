@@ -18,14 +18,14 @@
   <div class="control-group">
     <%= f.label :name, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :name, :class => 'form-control' %>
+      <%= f.text_field :name, :class => 'form-control', :autocomplete => :off %>
     </div>
     <%= error_span(@owner[:name]) %>
   </div>
   <div class="control-group">
     <%= f.label :image, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :image, :class => 'form-control' %>
+      <%= f.text_field :image, :class => 'form-control', :autocomplete => :off %>
 	    <%= f.file_field :image %>
     </div>
     <%= error_span(@owner[:image]) %>
@@ -33,14 +33,15 @@
   <div class="control-group">
     <%= f.label :description, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :description, :class => 'form-control' %>
+      <%= f.text_field :description, :class => 'form-control', :autocomplete => :off %>
     </div>
     <%= error_span(@owner[:description]) %>
   </div>
   <div class="control-group">
     <%= f.label :owner_type, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :owner_type, :class => 'form-control' %>
+	  <%= f.radio_button :owner_type, "Company", :checked => true %><p>Company</p>
+	  <%= f.radio_button :owner_type, "Event" %><p>Event</p>
     </div>
     <%= error_span(@owner[:owner_type]) %>
   </div>

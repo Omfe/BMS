@@ -18,35 +18,35 @@
   <div class="control-group">
     <%= f.label :name, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :name, :class => 'form-control' %>
+      <%= f.text_field :name, :class => 'form-control', :autocomplete => :off %>
     </div>
     <%= error_span(@beacon[:name]) %>
   </div>
   <div class="control-group">
     <%= f.label :factory_id, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :factory_id, :class => 'form-control' %>
+      <%= f.text_field :factory_id, :class => 'form-control', :autocomplete => :off %>
     </div>
     <%= error_span(@beacon[:factory_id]) %>
   </div>
   <div class="control-group">
     <%= f.label :description, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :description, :class => 'form-control' %>
+      <%= f.text_field :description, :class => 'form-control', :autocomplete => :off %>
     </div>
     <%= error_span(@beacon[:description]) %>
   </div>
   <div class="control-group">
     <%= f.label :latitude, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :latitude, :class => 'form-control' %>
+      <%= f.text_field :latitude, :class => 'form-control', :autocomplete => :off %>
     </div>
     <%= error_span(@beacon[:latitude]) %>
   </div>
   <div class="control-group">
     <%= f.label :longitude, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :longitude, :class => 'form-control' %>
+      <%= f.text_field :longitude, :class => 'form-control', :autocomplete => :off %>
     </div>
     <%= error_span(@beacon[:longitude]) %>
   </div>

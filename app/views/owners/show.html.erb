@@ -32,7 +32,6 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:factory_id) %></th>
       <th><%= model_class.human_attribute_name(:description) %></th>
@@ -46,7 +45,6 @@
   <tbody>
     <% @beacons.each do |beacon| %>
       <tr>
-        <td><%= link_to beacon.id, beacon_path(beacon) %></td>
         <td><%= beacon.name %></td>
         <td><%= beacon.factory_id %></td>
         <td><%= beacon.description %></td>
