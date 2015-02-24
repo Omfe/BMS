@@ -1,16 +1,25 @@
 class OwnersController < ApplicationController
   before_action :set_owner, only: [:show, :edit, :update, :destroy]
+  helper_method :sort_column, :sort_direction
 
   # GET /owners
   # GET /owners.json
   def index
-    @owners = Owner.all
+   # @owners = Owner.all
+    @owners = Owner.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 3, :page => params[:page]) 
+  end
+  
+  def sort_column
+      Owner.column_names.include?(params[:sort]) ? params[:sort] : "name"
+  end
+  
+  def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
   # GET /owners/1
   # GET /owners/1.json
   def show
-    puts(">>>>>>>")
     @beacons = @owner.beacons
   end
 
