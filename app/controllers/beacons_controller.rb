@@ -1,10 +1,24 @@
 class BeaconsController < ApplicationController
   before_action :set_beacon, only: [:show, :edit, :update, :destroy]
+  helper_method :sort_column, :sort_direction
 
   # GET /beacons
   # GET /beacons.json
   def index
-    @beacons = Beacon.all
+    puts(">>>>>>>>>>>>>  #{params[:owner_id]}")
+    @beacons = Beacon.search(params[:search], params[:owner_id]).order(sort_column + " " + sort_direction).paginate(:per_page => 3, :page => params[:page]) 
+  end
+  
+  def test
+    $owner_id = params[:id]
+  end
+  
+  def sort_column
+      Beacon.column_names.include?(params[:sort]) ? params[:sort] : "name"
+  end
+  
+  def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
   # GET /beacons/1
@@ -16,9 +30,7 @@ class BeaconsController < ApplicationController
   def new
     @beacon = Beacon.new
     
-    puts(">>>>>>>>>>>>> 1 Let's talk about #{params[:id]}.")
     $owner = Owner.find(params[:id])
-    puts(">>>>>>>>>>>>> 1 Let's talk about the #{$owner.id}.")
   end
 
   # GET /beacons/1/edit
@@ -36,7 +48,7 @@ class BeaconsController < ApplicationController
     respond_to do |format|
       if @beacon.save
         format.html { redirect_to @beacon, notice: 'Beacon was successfully created.' }
-        format.json { render :show, status: :created, location: @beacon }
+        format.json { render  :template => "owners/show", status: :created, location: @beacon }
       else
         format.html { render :new }
         format.json { render json: @beacon.errors, status: :unprocessable_entity }
@@ -50,7 +62,7 @@ class BeaconsController < ApplicationController
     respond_to do |format|
       if @beacon.update(beacon_params)
         format.html { redirect_to @beacon, notice: 'Beacon was successfully updated.' }
-        format.json { render :show, status: :ok, location: @beacon }
+        format.json { render :template => "owners/show", status: :ok, location: @beacon }
       else
         format.html { render :edit }
         format.json { render json: @beacon.errors, status: :unprocessable_entity }

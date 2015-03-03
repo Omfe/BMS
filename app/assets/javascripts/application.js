@@ -20,7 +20,16 @@
 	    $.get($("#owners_search").attr("action"), $("#owners_search").serialize(), null, "script");
 	    return false;
 	  });
-	  $("#products th a, #products .pagination a").live("click", function() {
+  	  $("#beacons_search").keyup(function() {
+
+  	    $.get($("#beacons_search").attr("action"), $("#beacons_search").serialize(), null, "script");
+  	    return false;
+  	  });
+  	  $("#beacons th a, #beacons .pagination a").live("click", function() {
+  	      $.getScript(this.href);
+  	      return false;
+  	    });
+	  $("#owners th a, #owners .pagination a").live("click", function() {
 	      $.getScript(this.href);
 	      return false;
 	    });
