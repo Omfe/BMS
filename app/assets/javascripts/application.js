@@ -17,19 +17,21 @@
 // = require_tree .
 	$(function() {
 	  $("#owners_search").keyup(function() {
+		  		  window.alert(5);
 	    $.get($("#owners_search").attr("action"), $("#owners_search").serialize(), null, "script");
 	    return false;
 	  });
   	  $("#beacons_search").keyup(function() {
-
   	    $.get($("#beacons_search").attr("action"), $("#beacons_search").serialize(), null, "script");
   	    return false;
   	  });
   	  $("#beacons th a, #beacons .pagination a").live("click", function() {
+		  window.alert(7);
   	      $.getScript(this.href);
   	      return false;
   	    });
 	  $("#owners th a, #owners .pagination a").live("click", function() {
+		  		  window.alert(8);
 	      $.getScript(this.href);
 	      return false;
 	    });

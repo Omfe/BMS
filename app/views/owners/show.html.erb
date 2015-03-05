@@ -26,7 +26,18 @@
               :class => 'btn btn-danger' %>
 		
 
-<div id="beacons"><%= render 'beacons/beacons' %></div>
+<div class="page-header">
+  <h2><%=t '.title', :default => 'Beacons' %></h2>
+</div>
+
+<%= form_tag beacons_path, :method => 'get', :id => "beacons_search" do %>
+  <p>
+    <%= text_field_tag :search, params[:search], :autocomplete => :off %>
+    <%= submit_tag "Search", :name => nil %>
+	<%= hidden_field_tag :owner_id, params[:id] %>
+  </p>
+ <div id="beacons"><%= render 'beacons/beacons' %></div>
+<% end %>
 
 
 <%= link_to t('.new', :default => t("helpers.links.new")),

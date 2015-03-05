@@ -5,12 +5,9 @@ class BeaconsController < ApplicationController
   # GET /beacons
   # GET /beacons.json
   def index
-    puts(">>>>>>>>>>>>>  #{params[:owner_id]}")
-    @beacons = Beacon.search(params[:search], params[:owner_id]).order(sort_column + " " + sort_direction).paginate(:per_page => 3, :page => params[:page]) 
-  end
-  
-  def test
-    $owner_id = params[:id]
+    @beacons = Beacon.search(params[:search], params[:owner_id])
+                     .order(sort_column + " " + sort_direction)
+                     .paginate(:page => params[:page], :per_page => 3) 
   end
   
   def sort_column

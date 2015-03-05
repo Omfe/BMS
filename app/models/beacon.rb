@@ -6,7 +6,7 @@ class Beacon < ActiveRecord::Base
   def self.search(search, owner_id)
     if search
       #joins(:owner).where('name LIKE ? or owners.id LIKE ?', "%#{search}%", "%#{owner_id}%")
-      where('name LIKE ? AND owners.id = ?', "%#{search}%", "%#{owner_id}")
+      where('name LIKE ? AND owner_id = ?', "%#{search}%", "#{owner_id}")
     else
       where(nil)
     end
