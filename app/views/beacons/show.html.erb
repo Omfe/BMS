@@ -17,9 +17,7 @@
   <dt><strong><%= model_class.human_attribute_name(:owner_id) %>:</strong></dt>
   <dd><%= @beacon.owner_id %></dd>
 </dl>
-
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              beacons_path, :class => 'btn btn-default'  %>
+<%= link_to "Done".html_safe, owner_path(@beacon.owner), :class => "btn btn-default" %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_beacon_path(@beacon), :class => 'btn btn-default' %>
 <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
