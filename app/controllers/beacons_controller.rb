@@ -42,21 +42,36 @@ class BeaconsController < ApplicationController
     @beacon.owner_id = $owner.id
     
     respond_to do |format|
-      if @beacon.save
-        format.html { redirect_to @beacon, notice: 'Beacon was successfully created.' }
-        format.json { render  :template => "owners/show", status: :created, location: @beacon }
-      else
+      status_code = Beacon.gimbal_create_beacon(@beacon)
+      if status_code == "200"
+        if @beacon.save
+          format.html { redirect_to @beacon, notice: 'Beacon was successfully created.' }
+          format.json { render  :template => "owners/show", status: :created, location: @beacon }
+        else
+          format.html { render :new }
+          format.json { render json: @beacon.errors, status: :unprocessable_entity }
+        end
+      elsif status_code == "422"
+        @beacon.errors.add(:factory_id, "Beacon already activated")
         format.html { render :new }
         format.json { render json: @beacon.errors, status: :unprocessable_entity }
+      else
+        @beacon.errors.add(:factory_id, "Invalid Id")
+        format.html { render :new }
+        format.json { render json: @beacon.errors, status: :unprocessable_entity }
+        #render json: {status: "Invalid Beacon"}, status: 404
       end
     end
   end
+  
+  
 
   # PATCH/PUT /beacons/1
   # PATCH/PUT /beacons/1.json
   def update
     respond_to do |format|
       if @beacon.update(beacon_params)
+        Beacon.gimbal_update_beacon(@beacon)
         format.html { redirect_to @beacon, notice: 'Beacon was successfully updated.' }
         format.json { render :template => "owners/show", status: :ok, location: @beacon }
       else
@@ -65,13 +80,14 @@ class BeaconsController < ApplicationController
       end
     end
   end
-
+      
   # DELETE /beacons/1
   # DELETE /beacons/1.json
   def destroy
     @beacon.destroy
     respond_to do |format|
-      format.html { redirect_to beacons_url, notice: 'Beacon was successfully destroyed.' }
+      Beacon.gimbal_delete_beacon(@beacon)
+      format.html { redirect_to owners_url, notice: 'Beacon was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
