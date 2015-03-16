@@ -17,7 +17,7 @@
       <tr>
         <td><%= owner.id %></td>
         <td><%= link_to owner.name, owner_path(owner) %></td>
-        <td><%= owner.image %></td>
+        <td><%= image_tag owner.image_url(:thumb).to_s %></td>
         <td><%= owner.description %></td>
         <td><%= owner.owner_type %></td>
         <td><%=l owner.created_at %></td>

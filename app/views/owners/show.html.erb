@@ -8,7 +8,7 @@
   <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
   <dd><%= @owner.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:image) %>:</strong></dt>
-  <dd><%= @owner.image %></dd>
+  <dd><%= image_tag @owner.image_url(:thumb).to_s %></dd>
   <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
   <dd><%= @owner.description %></dd>
   <dt><strong><%= model_class.human_attribute_name(:owner_type) %>:</strong></dt>

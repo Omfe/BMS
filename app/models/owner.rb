@@ -1,5 +1,6 @@
 class Owner < ActiveRecord::Base
   has_many :beacons
+  mount_uploader :image, ImageUploader
   validates :name, presence: true
   VALID_NAMES = %w(Company Event)
   validates_inclusion_of :owner_type, :in => VALID_NAMES
