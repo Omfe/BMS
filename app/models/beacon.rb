@@ -1,5 +1,6 @@
 class Beacon < ActiveRecord::Base
   belongs_to :owner
+
   validates :name, :factory_id, :latitude, :longitude, presence: true
   require 'uri'
   require 'net/http'
@@ -64,4 +65,16 @@ class Beacon < ActiveRecord::Base
     res = https.request(req)
     return res.code
   end
+  
+  def self.gimbal_get_beacon(beacon)
+    uri = URI.parse("https://manager.gimbal.com/api/beacons/#{beacon.factory_id}")
+    https = Net::HTTP.new(uri.host,uri.port)
+    https.use_ssl = true
+    req = Net::HTTP::Get.new(uri.path, initheader = {'Content-Type' =>'application/json'})
+    req['AUTHORIZATION'] = 'Token token=8a4a400252a9b0dc3a76130de89e9522'
+    res = https.request(req)
+    puts "Response #{res.code} #{res.message}: #{res.body}"
+    return res
+  end
+  
 end

@@ -1,3 +1,5 @@
+require 'rubygems'
+require 'json'
 class OwnersController < ApplicationController
   before_action :set_owner, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
@@ -21,6 +23,26 @@ class OwnersController < ApplicationController
   # GET /owners/1.json
   def show
     @beacons = @owner.beacons
+    @beacons.each {
+      |beacon|
+      response = Owner.gimbal_get_beacon(beacon)
+      body = JSON.parse(response.body)
+      hardware = body['hardware']
+      
+      puts ">>>>>>>>>>>>>>>>>> #{hardware}"
+      case hardware # a_variable is the variable we want to compare
+      when 'Series 10'    #compare to 1
+        puts ">>>>>>>>>>>>>>>>>> Entro al 10"
+        beacon.image = 'Series10.png'
+        puts ">>>>>>>>>>>>>>>>>> #{beacon.image}"
+      when 'Series 20'    #compare to 2
+        beacon.image = '/assets/images/Series20.png' 
+      when 'Series 21'
+        beacon.image ='/assets/images/Series21.png' 
+      else
+        puts "it was something else"
+      end
+    }
   end
 
   # GET /owners/new

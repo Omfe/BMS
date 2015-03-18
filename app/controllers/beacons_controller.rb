@@ -7,7 +7,25 @@ class BeaconsController < ApplicationController
   def index
     @beacons = Beacon.search(params[:search], params[:owner_id])
                      .order(sort_column + " " + sort_direction)
-                     .paginate(:page => params[:page], :per_page => 3) 
+                     .paginate(:page => params[:page], :per_page => 3)
+                     
+                     @beacons.each {
+                       |beacon|
+                       response = Beacon.gimbal_get_beacon(beacon)
+                       body = JSON.parse(response.body)
+                       hardware = body['hardware']
+      
+                       case hardware
+                       when 'Series 10'
+                         beacon.image = 'Series10.png'
+                       when 'Series 20'
+                         beacon.image = 'Series20.png'
+                       when 'Series 21'
+                         beacon.image = 'Series21.png'
+                       else
+                         beacon.image = 'NoImage.png'
+                       end
+                     }
   end
   
   def sort_column
