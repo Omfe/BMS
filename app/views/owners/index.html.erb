@@ -1,17 +1,28 @@
 <%= javascript_include_tag "application" %>
 <%- model_class = Owner -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %>
+	  <span class="fa fa-user fa-fw" aria-hidden="true"></span>
+  </h1>
 </div>
 
-<%= form_tag owners_path, :method => 'get', :id => "owners_search" do %>
-  <p>
-    <%= text_field_tag :search, params[:search], :autocomplete => :off %>
-    <%= submit_tag "Search", :name => nil %>
-  </p>
-  <div id="owners"><%= render 'owners' %></div>
-<% end %>
+<div class="container-fluid">
+	<%= form_tag owners_path, :method => 'get', :id => "owners_search" do %>
+	  <p>
+		  <div class="row">
+			  <div class="col-md-8">
+				  			<a class="btn btn-success btn-s" href="/owners/new">New
+				  				<span class="fa fa-plus fa-fw" aria-hidden="true"></span>
+				  			</a>
+			  </div>
+			  <div class="col-md-4">
+				  <%= text_field_tag :search, params[:search], :autocomplete => :off, :placeholder => 'Search', :class => 'form-control' %>
+			  </div>
+		  </div>
+	  </p>
+	  <div id="owners"><%= render 'owners' %></div>
+	<% end %>
+</div>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_owner_path,
-            :class => 'btn btn-primary' %>
+
+

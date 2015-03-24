@@ -5,11 +5,10 @@
   <thead>
     <tr>
       <th><%= sortable "name" %></th>
-	  <th><%= "Factory" %></th>
+	  <th><%= "FactoryId" %></th>
 	  <th><%= "Description" %></th>
 	  <th><%= "Latitude" %></th>
 	  <th><%= "Longitude" %></th>
-	  <th><%= "Owner Id" %></th>
 	  <th><%= "Device" %></th>
 	  <th><%= "Created At" %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -23,9 +22,8 @@
         <td><%= beacon.description %></td>
         <td><%= beacon.latitude %></td>
         <td><%= beacon.longitude %></td>
-        <td><%= beacon.owner_id %></td>
 		<td><%= image_tag beacon.image %></td>
-        <td><%=l beacon.created_at %></td>
+        <td><%=l beacon.created_at, format: :short  %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_beacon_path(beacon), :class => 'btn btn-default btn-xs' %>
