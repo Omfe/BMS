@@ -3,7 +3,7 @@ require 'json'
 class OwnersController < ApplicationController
   before_action :set_owner, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
-
+  
   # GET /owners
   # GET /owners.json
   def index
@@ -29,12 +29,9 @@ class OwnersController < ApplicationController
       body = JSON.parse(response.body)
       hardware = body['hardware']
       
-      puts ">>>>>>>>>>>>>>>>>> #{hardware}"
       case hardware # a_variable is the variable we want to compare
       when 'Series 10'    #compare to 1
-        puts ">>>>>>>>>>>>>>>>>> Entro al 10"
         beacon.image = 'Series10.png'
-        puts ">>>>>>>>>>>>>>>>>> #{beacon.image}"
       when 'Series 20'    #compare to 2
         beacon.image = '/assets/images/Series20.png' 
       when 'Series 21'
