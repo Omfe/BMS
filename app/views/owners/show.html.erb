@@ -1,45 +1,68 @@
 <%- model_class = Owner -%>
-<head><%= javascript_include_tag "application" %></head>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+<%= javascript_include_tag "application" %>
+<head>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+</head>
+
+<div class="row">
+	<div class="col-lg-12 text-right">
+		<a class="btn btn-default btn-s" href="/owners#index">
+			<span class="fa fa-arrow-left fa-fw" aria-hidden="true"></span>
+			Owners List
+		</a>
+	</div>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @owner.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:image) %>:</strong></dt>
-  <dd><%= image_tag @owner.image_url(:thumb).to_s %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
-  <dd><%= @owner.description %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:owner_type) %>:</strong></dt>
-  <dd><%= @owner.owner_type %></dd>
-</dl>
-
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              owners_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_owner_path(@owner), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              owner_path(@owner),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
-		
-
 <div class="page-header">
-  <h2><%=t '.title', :default => 'Beacons' %></h2>
+  <h1><%= image_tag @owner.image_url(:thumb).to_s %> <%=t '.title', :default => @owner.name %>
+	  <div class = "pull-right">
+	    <%= link_to " Edit Owner", edit_owner_path(@owner), :class => 'btn btn-xs btn-default fa fa-pencil', :role=>'menuitem', :tabindex=>'-1' %>
+
+	   	 <%= link_to " Delete Owner", owner_path(@owner),
+	   	               :method => 'delete',
+	   	               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
+	   	               :class => 'btn btn-xs btn-danger fa fa-times',
+	   				    :role=>'menuitem', :tabindex=>'-1' %>
+	  </div>
+  </h1>
 </div>
 
-<%= form_tag beacons_path, :method => 'get', :id => "beacons_search" do %>
+<div class="container-fluid">
   <p>
-    <%= text_field_tag :search, params[:search], :autocomplete => :off %>
-    <%= submit_tag "Search", :name => nil %>
-	<%= hidden_field_tag :owner_id, params[:id] %>
+	  <div class="row">
+		  <div class="col-md-8">
+				<dl class="dl-horizontal">
+				  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+				  <dd><%= @owner.description %></dd>
+				  <dt><strong><%= model_class.human_attribute_name(:owner_type) %>:</strong></dt>
+				  <dd><%= @owner.owner_type %></dd>
+				</dl>		
+		  </div>
+		  <div class="col-md-4">
+		  </div>
+	  </div>
   </p>
- <div id="beacons"><%= render 'beacons/beacons' %></div>
-<% end %>
+</div>
 
+<div class="container-fluid">
+	<h2><%=t '.title', :default => 'Beacons' %></h2>
+	<%= form_tag beacons_path, :method => 'get', :id => "beacons_search" do %>
+	  <p>
+		  <div class="row">
+			  <div class="col-md-8">
+							<%= link_to " New Beacon",
+							            new_beacon_path(@owner, :id => @owner.id),
+							            :class => 'btn btn-success btn-md fa fa-plus' %>
+			  </div>
+			  <div class="col-md-4">
+				  <%= text_field_tag :search, params[:search], :autocomplete => :off, :placeholder => 'Search', :class => 'form-control' %>
+				  <%= hidden_field_tag :owner_id, params[:id] %>
+			  </div>
+		  </div>
+	  </p>
+	  <div id="beacons"><%= render 'beacons/beacons' %></div>
+	<% end %>
+</div>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_beacon_path(@owner, :id => @owner.id),
-            :class => 'btn btn-primary' %>

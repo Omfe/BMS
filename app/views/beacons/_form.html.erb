@@ -15,44 +15,45 @@
     </div>
   <% end %>
 
-  <div class="control-group">
+  <div class="control-group field">
     <%= f.label :name, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :name, :class => 'form-control', :autocomplete => :off %>
     </div>
     <%= error_span(@beacon[:name]) %>
   </div>
-  <div class="control-group">
+  <div class="control-group field">
 	<%= f.label :factory_id, 'Factory Id', :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :factory_id, :class => 'form-control', :autocomplete => :off %>
     </div>
     <%= error_span(@beacon[:factory_id]) %>
   </div>
-  <div class="control-group">
+  <div class="control-group field">
     <%= f.label :description, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :description, :class => 'form-control', :autocomplete => :off %>
+      <%= f.text_area :description, :class => 'form-control', :autocomplete => :off %>
     </div>
     <%= error_span(@beacon[:description]) %>
   </div>
-  <div class="control-group">
+  <div class="control-group field">
     <%= f.label :latitude, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :latitude, :class => 'form-control', :autocomplete => :off %>
     </div>
     <%= error_span(@beacon[:latitude]) %>
   </div>
-  <div class="control-group">
+  <div class="control-group field">
     <%= f.label :longitude, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :longitude, :class => 'form-control', :autocomplete => :off %>
     </div>
     <%= error_span(@beacon[:longitude]) %>
   </div>
+  <p></p>
+  
 
-  <%= f.submit nil, :class => 'btn btn-primary' %>
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-            :back, :class => 'btn btn-default' %>
+  <%= f.submit nil, :class => 'btn btn-success' %>
+  <%= link_to "Cancel", :back, :class => 'btn btn-default' %>
 
 <% end %>

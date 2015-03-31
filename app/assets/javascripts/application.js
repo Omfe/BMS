@@ -11,8 +11,8 @@
 // about supported directives.
 //
 // = require jquery
-// = require bootstrap-sprockets
 // = require jquery_ujs
+// = require bootstrap-sprockets
 // = require twitter/bootstrap
 // = require turbolinks
 // = require_tree .
@@ -25,12 +25,4 @@
   	    $.get($("#beacons_search").attr("action"), $("#beacons_search").serialize(), null, "script");
   	    return false;
   	  });
-  	  $("#beacons th a, #beacons .pagination a").live("click", function() {
-  	      $.getScript(this.href);
-  	      return false;
-  	    });
-	  $("#owners th a, #owners .pagination a").live("click", function() {
-	      $.getScript(this.href);
-	      return false;
-	    });
 	});
