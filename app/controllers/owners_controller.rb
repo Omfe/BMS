@@ -8,7 +8,7 @@ class OwnersController < ApplicationController
   # GET /owners.json
   def index
    # @owners = Owner.all
-    @owners = Owner.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 3, :page => params[:page]) 
+    @owners = Owner.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 10, :page => params[:page]) 
   end
   
   def sort_column
