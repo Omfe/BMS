@@ -105,7 +105,7 @@ class BeaconsController < ApplicationController
     @beacon.destroy
     respond_to do |format|
       Beacon.gimbal_delete_beacon(@beacon)
-      format.html { redirect_to owners_url, notice: 'Beacon was successfully destroyed.' }
+      format.html { redirect_to owners_url, notice: 'Beacon was successfully deactivated.' }
       format.json { head :no_content }
     end
   end

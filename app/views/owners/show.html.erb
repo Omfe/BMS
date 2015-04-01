@@ -2,8 +2,6 @@
 <%= javascript_include_tag "application" %>
 <head>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 </head>
 
 <div class="row">
@@ -19,12 +17,7 @@
   <h1><%= image_tag @owner.image_url(:thumb).to_s %> <%=t '.title', :default => @owner.name %>
 	  <div class = "pull-right">
 	    <%= link_to " Edit Owner", edit_owner_path(@owner), :class => 'btn btn-xs btn-default fa fa-pencil', :role=>'menuitem', :tabindex=>'-1' %>
-
-	   	 <%= link_to " Delete Owner", owner_path(@owner),
-	   	               :method => 'delete',
-	   	               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
-	   	               :class => 'btn btn-xs btn-danger fa fa-times',
-	   				    :role=>'menuitem', :tabindex=>'-1' %>
+		<a type="submit" class="btn btn-xs btn-danger fa fa-times" onClick="$('#myModal').modal()">Delete Owner</a>
 	  </div>
   </h1>
 </div>
@@ -66,3 +59,25 @@
 	<% end %>
 </div>
 
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Delete</h4>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this Owner?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+   	 <%= link_to " Delete Owner", owner_path(@owner),
+   	               :method => 'delete',
+   	               :class => 'btn btn-danger fa fa-times',
+   				    :role=>'menuitem', :tabindex=>'-1' %>
+      </div>
+    </div>
+  </div>
+</div>
