@@ -84,6 +84,12 @@ class OwnersController < ApplicationController
   # DELETE /owners/1
   # DELETE /owners/1.json
   def destroy
+    @beacons = @owner.beacons
+    @beacons.each {
+      |beacon|
+      Beacon.gimbal_delete_beacon(beacon)
+      beacon.destroy
+    }
     @owner.destroy
     respond_to do |format|
       format.html { redirect_to owners_url, notice: 'Owner was successfully deleted.' }

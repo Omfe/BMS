@@ -27,11 +27,11 @@
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_beacon_path(beacon), :class => 'btn btn-default btn-s fa fa-pencil' %>
-		  <a type="submit" class="btn btn-s btn-danger fa fa-times" onClick="$('#myModal').modal()">Deactivate</a>
+		  <a type="submit" class="btn btn-s btn-danger fa fa-times" onClick="$('#myBeaconModal').modal()">Deactivate</a>
         </td>
       </tr>
 	  
-	  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal fade" id="myBeaconModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	    <div class="modal-dialog">
 	      <div class="modal-content">
 	        <div class="modal-header">

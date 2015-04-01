@@ -1,22 +1,43 @@
 <%- model_class = Beacon -%>
+<div class="row">
+	<div class="col-lg-12 text-right">
+		<a class="btn btn-default btn-s" href="/owners#index">
+			<span class="fa fa-arrow-left fa-fw" aria-hidden="true"></span>
+			Owners List
+		</a>
+	</div>
+</div>
+
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @beacon.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:factory_id) %>:</strong></dt>
-  <dd><%= @beacon.factory_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
-  <dd><%= @beacon.description %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:latitude) %>:</strong></dt>
-  <dd><%= @beacon.latitude %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:longitude) %>:</strong></dt>
-  <dd><%= @beacon.longitude %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:owner_id) %>:</strong></dt>
-  <dd><%= @beacon.owner_id %></dd>
-</dl>
+<div class="container-fluid">
+  <p>
+	  <div class="row">
+		  <div class="col-md-8">
+				<dl class="dl-horizontal">
+				  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+				  <dd><%= @beacon.name %></dd>
+				  <dt><strong><%= model_class.human_attribute_name(:factory_id) %>:</strong></dt>
+				  <dd><%= @beacon.factory_id %></dd>
+				  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+				  <dd><%= @beacon.description %></dd>
+				  <dt><strong><%= model_class.human_attribute_name(:latitude) %>:</strong></dt>
+				  <dd><%= @beacon.latitude %></dd>
+				  <dt><strong><%= model_class.human_attribute_name(:longitude) %>:</strong></dt>
+				  <dd><%= @beacon.longitude %></dd>
+				  <dt><strong><%= model_class.human_attribute_name(:owner_id) %>:</strong></dt>
+				  <dd><%= @beacon.owner_id %></dd>
+				</dl>	
+		  </div>
+		  <div class="col-md-4">
+		  </div>
+	  </div>
+  </p>
+</div>
+
+
 <%= link_to "Done".html_safe, owner_path(@beacon.owner), :class => "btn btn-default" %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_beacon_path(@beacon), :class => 'btn btn-default' %>
