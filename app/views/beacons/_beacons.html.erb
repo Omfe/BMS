@@ -4,7 +4,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= sortable "name" %></th>
+      <th><%= sortable "name" %><span class="fa fa-arrows-v fa-fw" aria-hidden="true"></span></th>
 	  <th><%= "FactoryId" %></th>
 	  <th><%= "Description" %></th>
 	  <th><%= "Latitude" %></th>
@@ -54,3 +54,4 @@
     <% end %>
   </tbody>
 </table>
+<%= will_paginate @beacons %>

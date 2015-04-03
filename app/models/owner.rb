@@ -4,7 +4,7 @@ class Owner < ActiveRecord::Base
   validates :name, presence: true
   VALID_NAMES = %w(Company Event)
   validates_inclusion_of :owner_type, :in => VALID_NAMES
-  #validates_inclusion_of :image, :in => %w( jpg gif png ), :message => "extension %s is not included in the list"
+  
   def self.search(search)
     if search
       where('name LIKE ?', "%#{search}%")
@@ -20,7 +20,6 @@ class Owner < ActiveRecord::Base
     req = Net::HTTP::Get.new(uri.path, initheader = {'Content-Type' =>'application/json'})
     req['AUTHORIZATION'] = 'Token token=8a4a400252a9b0dc3a76130de89e9522'
     res = https.request(req)
-    puts "Response #{res.code} #{res.message}: #{res.body}"
     return res
   end
 end

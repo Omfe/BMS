@@ -3,7 +3,6 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= sortable "id"%><span class="fa fa-arrows-v fa-fw" aria-hidden="true"></span></th>
       <th><%= sortable "name"%><span class="fa fa-arrows-v fa-fw" aria-hidden="true"></span></th>
       <th><%= "Image" %></th>
       <th><%= "Description" %></th>
@@ -14,7 +13,6 @@
   <tbody>
     <% @owners.each do |owner| %>
       <tr>
-        <td><%= owner.id %></td>
         <td><%= link_to owner.name, owner_path(owner), style: 'color:#4275a8;' %></td>
         <td><%= image_tag owner.image_url(:thumb).to_s %></td>
         <td><%= owner.description %></td>

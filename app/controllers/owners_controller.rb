@@ -23,6 +23,7 @@ class OwnersController < ApplicationController
   # GET /owners/1.json
   def show
     @beacons = @owner.beacons
+    @beacons = @beacons.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 10, :page => params[:page])
     @beacons.each {
       |beacon|
       response = Owner.gimbal_get_beacon(beacon)
@@ -37,7 +38,7 @@ class OwnersController < ApplicationController
       when 'Series 21'
         beacon.image ='/assets/images/Series21.png' 
       else
-        puts "it was something else"
+        beacon.image = 'NoImage.png'
       end
     }
   end

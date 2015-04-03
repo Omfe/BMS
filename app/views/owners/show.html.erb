@@ -41,7 +41,7 @@
 
 <div class="container-fluid">
 	<h2><%=t '.title', :default => 'Beacons' %></h2>
-	<%= form_tag beacons_path, :method => 'get', :id => "beacons_search" do %>
+	<%= form_tag owner_path(@owner), :method => 'get', :id => "beacons_search" do %>
 	  <p>
 		  <div class="row">
 			  <div class="col-md-8">
@@ -58,8 +58,6 @@
 	  <div id="beacons"><%= render 'beacons/beacons' %></div>
 	<% end %>
 </div>
-
-
 
 <div class="modal fade" id="myOwnerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">

@@ -6,10 +6,10 @@ class Beacon < ActiveRecord::Base
   require 'net/http'
   require 'net/https'
   
-  def self.search(search, owner_id)
+  def self.search(search)
     if search
       #joins(:owner).where('name LIKE ? or owners.id LIKE ?', "%#{search}%", "%#{owner_id}%")
-      where('name LIKE ? AND owner_id = ?', "%#{search}%", "#{owner_id}")
+      where('name LIKE ?', "%#{search}%")
     else
       where(nil)
     end
@@ -29,9 +29,7 @@ class Beacon < ActiveRecord::Base
     req = Net::HTTP::Post.new(uri.path, initheader = {'Content-Type' =>'application/json'})
     req['AUTHORIZATION'] = 'Token token=8a4a400252a9b0dc3a76130de89e9522'
     req.body = " #{@toSend} "
-    puts "#{req.body}"
     res = https.request(req)
-    puts "Response #{res.code} #{res.message}: #{res.body}"
     return res.code
   end
   
@@ -48,9 +46,7 @@ class Beacon < ActiveRecord::Base
     req = Net::HTTP::Put.new(uri.path, initheader = {'Content-Type' =>'application/json'})
     req['AUTHORIZATION'] = 'Token token=8a4a400252a9b0dc3a76130de89e9522'
     req.body = " #{@toSend} "
-    puts "#{req.body}"
     res = https.request(req)
-    puts "Response #{res.code} #{res.message}: #{res.body}"
     return res.code
   end
   
@@ -60,8 +56,6 @@ class Beacon < ActiveRecord::Base
     https.use_ssl = true
     req = Net::HTTP::Delete.new(uri.path, initheader = {'Content-Type' =>'application/json'})
     req['AUTHORIZATION'] = 'Token token=8a4a400252a9b0dc3a76130de89e9522'
-    #req.body = " #{@toSend} "
-    #puts "#{req.body}"
     res = https.request(req)
     return res.code
   end
@@ -73,7 +67,6 @@ class Beacon < ActiveRecord::Base
     req = Net::HTTP::Get.new(uri.path, initheader = {'Content-Type' =>'application/json'})
     req['AUTHORIZATION'] = 'Token token=8a4a400252a9b0dc3a76130de89e9522'
     res = https.request(req)
-    puts "Response #{res.code} #{res.message}: #{res.body}"
     return res
   end
   
