@@ -40,37 +40,38 @@ class BeaconsController < ApplicationController
     
     respond_to do |format|
       #temporal
-      if @beacon.save
-        format.html { redirect_to @beacon, notice: 'Beacon was successfully created.' }
-        format.json { render  :template => "owners/show", status: :created, location: @beacon }
+      if params[:activate_gimbal]
+        status_code = Beacon.gimbal_create_beacon(@beacon)
+        if status_code == "200"
+          if @beacon.save
+            format.html { redirect_to @beacon, notice: 'Beacon was successfully created.' }
+            format.json { render  :template => "owners/show", status: :created, location: @beacon }
+          else
+            format.html { render :new }
+            format.json { render json: @beacon.errors, status: :unprocessable_entity }
+          end
+        elsif status_code == "422"
+          @beacon.errors.add(:factory_id, "Beacon already activated")
+          format.html { render :new }
+          format.json { render json: @beacon.errors, status: :unprocessable_entity }
+        else
+          @beacon.errors.add(:factory_id, "Invalid Id")
+          format.html { render :new }
+          format.json { render json: @beacon.errors, status: :unprocessable_entity }
+          #render json: {status: "Invalid Beacon"}, status: 404
+        end
       else
-        format.html { render :new }
-        format.json { render json: @beacon.errors, status: :unprocessable_entity }
+        if @beacon.save
+          format.html { redirect_to @beacon, notice: 'Beacon was successfully created.' }
+          format.json { render  :template => "owners/show", status: :created, location: @beacon }
+        else
+          format.html { render :new }
+          format.json { render json: @beacon.errors, status: :unprocessable_entity }
+        end  
       end
-      # status_code = Beacon.gimbal_create_beacon(@beacon)
-#       if status_code == "200"
-#         if @beacon.save
-#           format.html { redirect_to @beacon, notice: 'Beacon was successfully created.' }
-#           format.json { render  :template => "owners/show", status: :created, location: @beacon }
-#         else
-#           format.html { render :new }
-#           format.json { render json: @beacon.errors, status: :unprocessable_entity }
-#         end
-#       elsif status_code == "422"
-#         @beacon.errors.add(:factory_id, "Beacon already activated")
-#         format.html { render :new }
-#         format.json { render json: @beacon.errors, status: :unprocessable_entity }
-#       else
-#         @beacon.errors.add(:factory_id, "Invalid Id")
-#         format.html { render :new }
-#         format.json { render json: @beacon.errors, status: :unprocessable_entity }
-#         #render json: {status: "Invalid Beacon"}, status: 404
-#       end
     end
   end
   
-  
-
   # PATCH/PUT /beacons/1
   # PATCH/PUT /beacons/1.json
   def update
@@ -105,6 +106,6 @@ class BeaconsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def beacon_params
-      params.require(:beacon).permit(:name, :factory_id, :description, :latitude, :longitude, :owner_id)
+      params.require(:beacon).permit(:name, :factory_id, :description, :latitude, :longitude, :owner_id, activate_gimbal: [])
     end
 end
