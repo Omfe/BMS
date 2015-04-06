@@ -34,9 +34,9 @@ class OwnersController < ApplicationController
       when 'Series 10'    #compare to 1
         beacon.image = 'Series10.png'
       when 'Series 20'    #compare to 2
-        beacon.image = '/assets/images/Series20.png' 
+        beacon.image = 'Series20.png' 
       when 'Series 21'
-        beacon.image ='/assets/images/Series21.png' 
+        beacon.image ='Series21.png' 
       else
         beacon.image = 'NoImage.png'
       end
