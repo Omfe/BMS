@@ -20,7 +20,7 @@
 				  <dt><strong><%= model_class.human_attribute_name(:longitude) %>:</strong></dt>
 				  <dd><%= @beacon.longitude %></dd>
 				  <dt><strong><%= model_class.human_attribute_name(:owner_id) %>:</strong></dt>
-				  <dd><%= @beacon.owner_id %></dd>
+				  <dd><%= @beacon.owner.name %></dd>
 				</dl>	
 		  </div>
 		  <div class="col-md-4">

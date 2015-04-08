@@ -24,23 +24,23 @@ class OwnersController < ApplicationController
   def show
     @beacons = @owner.beacons
     @beacons = @beacons.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 10, :page => params[:page])
-    @beacons.each {
-      |beacon|
-      response = Owner.gimbal_get_beacon(beacon)
-      body = JSON.parse(response.body)
-      hardware = body['hardware']
-      
-      case hardware # a_variable is the variable we want to compare
-      when 'Series 10'    #compare to 1
-        beacon.image = 'Series10.png'
-      when 'Series 20'    #compare to 2
-        beacon.image = 'Series20.png' 
-      when 'Series 21'
-        beacon.image ='Series21.png' 
-      else
-        beacon.image = 'NoImage.png'
-      end
-    }
+    # @beacons.each {
+ #      |beacon|
+ #      response = Owner.gimbal_get_beacon(beacon)
+ #      body = JSON.parse(response.body)
+ #      hardware = body['hardware']
+ #
+ #      case hardware # a_variable is the variable we want to compare
+ #      when 'Series 10'    #compare to 1
+ #        beacon.image = 'Series10.png'
+ #      when 'Series 20'    #compare to 2
+ #        beacon.image = 'Series20.png'
+ #      when 'Series 21'
+ #        beacon.image ='Series21.png'
+ #      else
+ #        beacon.image = 'NoImage.png'
+ #      end
+ #    }
   end
 
   # GET /owners/new

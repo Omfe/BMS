@@ -14,7 +14,7 @@
 // = require jquery_ujs
 // = require bootstrap-sprockets
 // = require twitter/bootstrap
-// = require turbolinks	
+// = require turbolinks		
 // = require_tree .
 	$(function() {
 	  $("#owners_search").keyup(function() {
@@ -26,3 +26,10 @@
   	    return false;
   	  });
 	});
+	
+	function DeactivateBeacon(BeaconName, BeaconID){
+		var path = "/beacons/"+BeaconID;
+		$("#beaconName").text(BeaconName);
+		$("#deactivateBeaconButton").attr("href",path);
+		$("#myBeaconModal").modal("show");
+	};
