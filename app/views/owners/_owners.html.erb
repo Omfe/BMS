@@ -1,11 +1,12 @@
 <%= hidden_field_tag :direction, params[:direction] %>
 <%= hidden_field_tag :sort, params[:sort] %>
-<table class="table table-striped">
+<%= javascript_include_tag "application" %>
+<table class="table table-striped" id="owners">
   <thead>
     <tr>
       <th><%= sortable "name"%><span class="fa fa-arrows-v fa-fw" aria-hidden="true"></span></th>
       <th><%= "Image" %></th>
-      <th><%= "Description" %></th>
+      <th class="description"><%= "Description" %></th>
       <th><%= "Type" %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -15,9 +16,9 @@
       <tr>
         <td><%= link_to owner.name, owner_path(owner), style: 'color:#4275a8;' %></td>
         <td><%= image_tag owner.image_url(:thumb).to_s %></td>
-        <td><%= owner.description %></td>
+        <td class="description"><div class="small_description"><%= owner.description %></div></td>
         <td><%= owner.owner_type %></td>
-        <td>
+        <td class="actionbuttons">
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_owner_path(owner), :class => 'btn btn-default btn-s fa fa-pencil' %>
 		  <%= link_to t('.show', :default => t("helpers.links.show")),
