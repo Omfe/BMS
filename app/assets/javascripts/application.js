@@ -10,11 +10,11 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-// = require jquery
+// = require jquery	
 // = require jquery_ujs
 // = require bootstrap-sprockets
-// = require twitter/bootstrap
-// = require turbolinks		
+// = require twitter/bootstrap	
+// = require turbolinks			
 // = require_tree .
 	$(function() {
 	  $("#owners_search").keyup(function() {
@@ -25,6 +25,12 @@
   	    $.get($("#beacons_search").attr("action"), $("#beacons_search").serialize(), null, "script");
   	    return false;
   	  });
+	  
+	  $(".small_description").shorten({
+ 		 moreText: '[read more]',
+    	 lessText: '[show less]',
+		 showChars:'100'
+	  });
 	});
 	
 	function DeactivateBeacon(BeaconName, BeaconID){
@@ -33,3 +39,4 @@
 		$("#deactivateBeaconButton").attr("href",path);
 		$("#myBeaconModal").modal("show");
 	};
+	
